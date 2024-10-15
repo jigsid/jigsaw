@@ -19,19 +19,13 @@ export const navLinks = [
 
 export const socialLinks = [
   {
-    label: 'Twitter',
-    url: 'https://twitter.com/komalmishra_03',
-    icon: 'twitter',
-  },
-  {
     label: 'Github',
-    url: 'https://github.com/Komall03',
+    url: 'https://github.com/siddhammishra',
     icon: 'github',
   },
   {
     label: 'Figma',
-    url: 'https://www.linkedin.com/in/komal-mishra-10332a206/',
+    url: 'https://www.linkedin.com/in/siddham-mishra-611437247/',
     icon: 'figma',
   },
-  
 ];

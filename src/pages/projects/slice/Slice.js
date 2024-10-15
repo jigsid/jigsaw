@@ -40,11 +40,16 @@ import { Fragment } from 'react';
 import { media } from 'utils/style';
 import styles from './Slice.module.css';
 
-const title = 'Portfolio website';
+const title = 'Ez Post';
 const description =
-  'This website serves as my personal portfolio website.   Technologies used: three.js and next.js.';
-const roles = ['User Research', 'UX Design', 'Interface Design'];
- 
+  'Technologies Used: React, Typescript, Postgress, Prisma ORM, Cloudflare Workers, JWT';
+const roles = [
+  'Functionlaties',
+  'Signin/Signup',
+  'Post:Title, Content',
+  'JWT Authentication',
+];
+
 export const Slice = () => {
   return (
     <Fragment>
@@ -59,7 +64,7 @@ export const Slice = () => {
         <ProjectHeader
           title={title}
           description={description}
-          url="https://github.com/Komall03/Portfolio"
+          url="https://github.com/siddhammishra/Ez-Post"
           roles={roles}
         />
         <ProjectSection padding="top">
@@ -72,92 +77,7 @@ export const Slice = () => {
             />
           </ProjectSectionContent>
         </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionColumns centered className={styles.columns}>
-            <div className={styles.imagesText}>
-              <ProjectSectionHeading></ProjectSectionHeading>
-              <ProjectSectionText>
-                
-              </ProjectSectionText>
-              <ProjectSectionText>
-              
-              </ProjectSectionText>
-            </div>
-            <div className={styles.sidebarImages}>
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[sliceSidebarLayers, sliceSidebarLayersLarge]}
-                placeholder={sliceSidebarLayersPlaceholder}
-                alt="The layers sidebar design, now with user profiles."
-                sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
-              />
-              <Image
-                className={styles.sidebarImage}
-                srcSet={[sliceSidebarAnnotations, sliceSidebarAnnotationsLarge]}
-                placeholder={sliceSidebarAnnotationsPlaceholder}
-                alt="Multiple user annotations on a shared layer."
-                sizes={`(max-width: ${media.mobile}px) 200px, 343px`}
-              />
-            </div>
-          </ProjectSectionColumns>
-        </ProjectSection>
-        <ProjectSection light>
-          <ProjectSectionContent>
-            <ProjectTextRow>
-              <ProjectSectionHeading></ProjectSectionHeading>
-              <ProjectSectionText>
-                
-              </ProjectSectionText>
-            </ProjectTextRow>
-            
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection padding="top">
-          <ProjectSectionContent className={styles.grid}>
-            <div className={styles.gridImage}>
-              <div className={styles.gridBackground}>
-                <Image
-                  srcSet={[sliceBackgroundBar, sliceBackgroundBarLarge]}
-                  placeholder={sliceBackgroundBarPlaceholder}
-                  alt=""
-                  role="presentation"
-                  sizes={`(max-width: ${media.mobile}px) 312px, (max-width: ${media.tablet}px) 408px, 514px`}
-                />
-              </div>
-              <div className={styles.gridForeground}>
-                <Image
-                  srcSet={[sliceAnnotation, sliceAnnotationLarge]}
-                  placeholder={sliceAnnotationPlaceholder}
-                  alt="An annotation preview popover with statistics for shape perimeter and area."
-                  sizes={`(max-width: ${media.mobile}px) 584px, (max-width: ${media.tablet}px) 747px, 556px`}
-                />
-              </div>
-            </div>
-            <div className={styles.gridText}>
-              <ProjectSectionHeading></ProjectSectionHeading>
-              <ProjectSectionText>
-                
-              </ProjectSectionText>
-            </div>
-          </ProjectSectionContent>
-        </ProjectSection>
-        <ProjectSection>
-          <ProjectSectionContent>
-            <ProjectTextRow>
-              <ProjectSectionHeading></ProjectSectionHeading>
-              <ProjectSectionText>
-                
-              </ProjectSectionText>
-            </ProjectTextRow>
-            <Image
-              src={sliceIrl}
-              placeholder={sliceIrlPlaceholder}
-              alt="Students at the University of New South Wales using the new collaborative annotation features"
-            />
-          </ProjectSectionContent>
-        </ProjectSection>
       </ProjectContainer>
-      <Footer />
     </Fragment>
   );
 };

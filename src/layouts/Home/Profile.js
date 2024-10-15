@@ -28,7 +28,7 @@ const ProfileText = ({ visible, titleId }) => (
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       I always try to learn new things and expand my knowledge.Being comfortable with code
       allows me to rapidly prototype and validate experiences. Apart from work, I like to
-      read articles on different technologies and like to play Table Tennis.
+      read articles on different technologies and keep my biceps pumped.
     </Text>
   </Fragment>
 );

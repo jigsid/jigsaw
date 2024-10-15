@@ -1,4 +1,4 @@
-service: hamish-portfolio
+service: siddham-portfolio
 
 provider:
   name: aws
