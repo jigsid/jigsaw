@@ -4,19 +4,15 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>undefined/contact/</loc>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>undefined/articles/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>undefined/uses/</loc>
+    <loc>undefined/contact/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>undefined/projects/slice/</loc>
+    <loc>undefined/uses/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
@@ -25,6 +21,10 @@
   </url>
   <url>
     <loc>undefined/projects/volkihar-knight/</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>undefined/projects/slice/</loc>
     <changefreq>monthly</changefreq>
   </url>
   <url>
