@@ -21,12 +21,9 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hey there!" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I'm Siddham Mishra, student at Army Institute of Technology Pune. I am an individual
-      with a keen eye for details, seeking to advance my growing tech career as a Software
-      Developer. I love participating in hackathons and building projects, and was a part
-      of the Codess Cafe Fellowship, during which I coordinated and worked with people all
-      around the country! I also had the privilege of working with Microsoft employees
-      earlier when I was a part of the Microsoft Intern Engage mentorship program.
+      I am Siddham Mishra, student at Army Institute of Technology Pune. I am an
+      individual with a keen eye for details, seeking to advance my growing tech career as
+      a Software Developer. I love participating in hackathons and building projects.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       I always try to learn new things and expand my knowledge.Being comfortable with code

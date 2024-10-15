@@ -16,7 +16,7 @@ import { Intro } from 'layouts/Home/Intro';
 import { Profile } from 'layouts/Home/Profile';
 import { ProjectSummary } from 'layouts/Home/ProjectSummary';
 import { useEffect, useRef, useState } from 'react';
-import  pic3 from "../../assets/pic3.png"
+import pic3 from '../../assets/pic3.png';
 import styles from './Home.module.css';
 
 const disciplines = ['Designer', 'Prototyper', 'Animator', 'Illustrator'];
@@ -70,7 +70,7 @@ export const Home = () => {
     <div className={styles.home}>
       <Meta
         title="Designer + Developer"
-        description="Design portfolio of Harsh — a product designer working on web & mobile
+        description="Design portfolio of Siddham — a product designer working on web & mobile
           apps with a focus on motion, experience design, and accessibility."
       />
       <Intro
@@ -84,8 +84,8 @@ export const Home = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Data Analysis App "
-        description="This is a data analysis App and was developed using the machine learning Concept. In this app there will be an open source web platform where user can upload data, perform multiple data analysis and cleaning processes on the given data and allow other users to comment for getting to a better conclusion. A summarized report will be generated at the end ."
+        title="Ez Pay "
+        description="This is a payment app where User can withdrawl money from bank and transfer money with friends."
         buttonText="View project"
         buttonLink="/projects/my-blog"
         model={{
@@ -129,9 +129,10 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={2}
-        title=" Portfolio website"
-        description="This website serves as my personal portfolio website and was built using three.js and next.js."
+        title=" Ez Post"
+        description="A simple website where User can Post message and see what others has Posted previously."
         buttonLink="/projects/slice"
+        buttonText="View project"
         model={{
           type: 'laptop',
           alt: 'Showing my website',
