@@ -7,7 +7,6 @@ import imageSprLessonBuilderDark from 'assets/myblog.jpg';
 import imageSprLessonBuilderLightLarge from 'assets/mybloglight.png';
 import imageSprLessonBuilderLightPlaceholder from 'assets/mybloglight.png';
 import imageSprLessonBuilderLight from 'assets/mybloglight.png';
-import pic2 from 'assets/pic2.png';
 import { Footer } from 'components/Footer';
 import { Link } from 'components/Link';
 import { Meta } from 'components/Meta';
@@ -65,14 +64,7 @@ export const MyBlog = () => {
         />
         <ProjectSection padding="top">
           <ProjectSectionContent>
-            <ProjectImage
-              raised
-              key={themeId}
-              srcSet={isDark ? [pic2, pic2] : [pic2, pic2]}
-              placeholder={isDark ? pic2 : pic2}
-              sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 800px, 1000px`}
-              alt="The aero lesson builder app dragging an audio component into a screen about plant cells."
-            />
+            
           </ProjectSectionContent>
         </ProjectSection>
       </ProjectContainer>

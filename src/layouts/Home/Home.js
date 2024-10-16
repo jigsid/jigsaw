@@ -4,9 +4,9 @@ import gamestackTexture2 from 'assets/gamestack-list.jpg';
 import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
 import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
 import gamestackTexture from 'assets/gamestack-login.jpg';
-import sliceTextureLarge from 'assets/myportfolio.png';
-import sliceTexturePlaceholder from 'assets/myportfolio.png';
-import sliceTexture from 'assets/myportfolio.png';
+import sliceTextureLarge from 'assets/pic1.png';
+import sliceTexturePlaceholder from 'assets/pic1.png';
+import sliceTexture from 'assets/pic1.png';
 import sprTextureLarge from 'assets/myblog.jpg';
 import sprTexturePlaceholder from 'assets/myblog.jpg';
 import sprTexture from 'assets/myblog.jpg';
@@ -68,11 +68,7 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
-      <Meta
-        title="Developer"
-        description="Design portfolio of Siddham — a product designer working on web & mobile
-          apps with a focus on motion, experience design, and accessibility."
-      />
+      <Meta title="Developer" description="A Passionate developer." />
       <Intro
         id="intro"
         sectionRef={intro}

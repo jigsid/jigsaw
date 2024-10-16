@@ -67,16 +67,7 @@ export const Slice = () => {
           url="https://github.com/siddhammishra/Ez-Post"
           roles={roles}
         />
-        <ProjectSection padding="top">
-          <ProjectSectionContent>
-            <ProjectImage
-              srcSet={[sliceApp, sliceAppLarge]}
-              placeholder={sliceAppPlaceholder}
-              alt="The Slice web application showing a selected user annotation."
-              sizes={`(max-width: ${media.mobile}px) 100vw, (max-width: ${media.tablet}px) 90vw, 80vw`}
-            />
-          </ProjectSectionContent>
-        </ProjectSection>
+        
       </ProjectContainer>
     </Fragment>
   );
