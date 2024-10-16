@@ -19,7 +19,7 @@ import { useEffect, useRef, useState } from 'react';
 import pic3 from '../../assets/pic3.png';
 import styles from './Home.module.css';
 
-const disciplines = ['Designer', 'Prototyper', 'Animator', 'Illustrator'];
+const disciplines = ['Backend', 'DevOps', 'Frontend'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -69,7 +69,7 @@ export const Home = () => {
   return (
     <div className={styles.home}>
       <Meta
-        title="Designer + Developer"
+        title="Developer"
         description="Design portfolio of Siddham — a product designer working on web & mobile
           apps with a focus on motion, experience design, and accessibility."
       />
