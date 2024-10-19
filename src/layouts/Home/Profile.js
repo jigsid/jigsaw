@@ -21,14 +21,10 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hey there!" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I am Siddham Mishra, student at Army Institute of Technology Pune. I am an
-      individual with a keen eye for details, seeking to advance my growing tech career as
-      a Software Developer. I love participating in hackathons and building projects.
+    My name is Siddham Mishra, and I am currently a student at the Army Institute of Technology in Pune. I have a keen eye for detail and am passionate about advancing my career in technology as a Software Developer. I enjoy participating in hackathons and working on various projects.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I always try to learn new things and expand my knowledge.Being comfortable with code
-      allows me to rapidly prototype and validate experiences. Apart from work, I like to
-      read articles on different technologies and keep my biceps pumped.
+    I am always eager to learn new things and expand my knowledge. Being comfortable with coding enables me to rapidly prototype and validate ideas. Outside of my studies and work, I enjoy reading articles on different technologies and staying active at the gym.
     </Text>
   </Fragment>
 );

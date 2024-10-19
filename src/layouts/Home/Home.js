@@ -81,7 +81,7 @@ export const Home = () => {
         visible={visibleSections.includes(projectOne.current)}
         index={1}
         title="Ez Pay "
-        description="This is a payment app where User can withdrawl money from bank and transfer money with friends."
+        description="This is a payment website where User can withdrawl money from bank and transfer money with friends."
         buttonText="View project"
         buttonLink="/projects/my-blog"
         model={{
