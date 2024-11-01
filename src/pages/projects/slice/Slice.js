@@ -64,7 +64,7 @@ export const Slice = () => {
         <ProjectHeader
           title={title}
           description={description}
-          url="https://github.com/siddhammishra/Ez-Post"
+          url="https://github.com/jigsid/Ez-Post"
           roles={roles}
         />
         

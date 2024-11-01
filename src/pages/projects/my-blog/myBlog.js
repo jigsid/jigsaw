@@ -59,7 +59,7 @@ export const MyBlog = () => {
         <ProjectHeader
           title={title}
           description={description}
-          url="https://github.com/siddhammishra/Ez-Pay"
+          url="https://github.com/jigsid/Ez-Pay"
           roles={roles}
         />
         <ProjectSection padding="top">

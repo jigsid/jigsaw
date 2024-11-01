@@ -17,7 +17,7 @@ export const navLinks = [
 export const socialLinks = [
   {
     label: 'Github',
-    url: 'https://github.com/siddhammishra',
+    url: 'https://github.com/jigsid',
     icon: 'github',
   },
   {

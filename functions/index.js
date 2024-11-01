@@ -14,11 +14,11 @@ const ses = new aws.SES({
   region: 'us-east-1',
 });
 
-const ORIGINS = ['https://github.com/siddhammishra', 'https://github.com/siddhammishra'];
+const ORIGINS = ['https://github.com/jigsid', 'https://github.com/jigsid'];
 const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
-const EMAIL = 'siddhammishra@gmail.com';
-const FROM_EMAIL = 'siddhammishra@gmail.com';
+const EMAIL = 'jigsawsmma@gmail.com';
+const FROM_EMAIL = 'jigsawsmma@gmail.com';
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
 app.use(helmet());
