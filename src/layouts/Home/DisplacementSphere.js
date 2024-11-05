@@ -255,7 +255,7 @@ export const DisplacementSphere = (props) => {
               color: 'black', // Black text color for visibility
               cursor: 'pointer', // Pointer cursor for better UX
               transition: 'background 0.3s ease',
-            }}>
+            }}>n
               {isPlaying ? 'Pause' : 'Play'}
             </span>
           </div>
