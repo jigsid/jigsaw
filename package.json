@@ -12,6 +12,7 @@
     "esbuild": "^0.15.2",
     "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.5",
+    "file-loader": "^6.2.0",
     "fs-extra": "^10.1.0",
     "globby": "^13.1.2",
     "postcss": "^8.4.16",
@@ -42,13 +43,12 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export -o build/",
+    "build": "next build && next export",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
     "deploy:functions": "cd functions && npm run deploy",
     "start": "next start",
     "test": "echo 'write some tests'",
-    "storybook": "start-storybook -p 9009 -h localhost",
-    "build": "next build && next export"
+    "storybook": "start-storybook -p 9009 -h localhost"
   },
   "browserslist": {
     "production": [

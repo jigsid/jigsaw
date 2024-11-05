@@ -3,7 +3,7 @@ module.exports = {
   trailingSlash: true,
   pageExtensions: ['page.js', 'api.js'],
   webpack(config, { isServer }) {
-    // Run custom scripts
+    // Run custom scripts on the server side
     if (isServer) {
       require('./scripts/generate-sitemap');
       require('./scripts/draco');
@@ -16,13 +16,13 @@ module.exports = {
       use: [{ loader: '@svgr/webpack', options: { svgo: false } }],
     });
 
-    // Import videos, models, hdrs, and fonts
+    // Import videos, models, HDRs, fonts, and audio files
     config.module.rules.push({
-      test: /\.(mp4|hdr|glb|woff|woff2)$/i,
+      test: /\.(mp4|hdr|glb|woff|woff2|mp3)$/i,  // Added `mp3` here
       type: 'asset/resource',
     });
 
-    // Force url import with `?url`
+    // Force URL import with `?url`
     config.module.rules.push({
       resourceQuery: /url/,
       type: 'asset/resource',

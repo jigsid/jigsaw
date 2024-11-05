@@ -2,7 +2,7 @@ import { useTheme } from 'components/ThemeProvider';
 import { Transition } from 'components/Transition';
 import { useReducedMotion, useSpring } from 'framer-motion';
 import { useInViewport, useWindowSize } from 'hooks';
-import { startTransition, useEffect, useRef } from 'react';
+import { startTransition, useEffect, useRef, useState } from 'react';
 import {
   AmbientLight,
   Color,
@@ -22,6 +22,7 @@ import { cleanRenderer, cleanScene, removeLights } from 'utils/three';
 import styles from './DisplacementSphere.module.css';
 import fragShader from './displacementSphereFragment.glsl';
 import vertShader from './displacementSphereVertex.glsl';
+import song from '../../assets/song.mp3';
 
 const springConfig = {
   stiffness: 30,
@@ -29,7 +30,7 @@ const springConfig = {
   mass: 2,
 };
 
-export const DisplacementSphere = props => {
+export const DisplacementSphere = (props) => {
   const theme = useTheme();
   const { rgbBackground, themeId, colorWhite } = theme;
   const start = useRef(Date.now());
@@ -48,6 +49,38 @@ export const DisplacementSphere = props => {
   const windowSize = useWindowSize();
   const rotationX = useSpring(0, springConfig);
   const rotationY = useSpring(0, springConfig);
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [barOpacity, setBarOpacity] = useState(1); // State for bar opacity
+
+  // Load the audio on component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio(song);
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  const toggleAudioPlayback = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setBarOpacity(1); // Reset opacity when paused
+      } else {
+        audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
+        setBarOpacity(0.7); // Make bar more transparent when playing
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Automatically pause audio when sphere goes out of viewport
+ 
 
   useEffect(() => {
     const { innerWidth, innerHeight } = window;
@@ -69,7 +102,7 @@ export const DisplacementSphere = props => {
     scene.current = new Scene();
 
     material.current = new MeshPhongMaterial();
-    material.current.onBeforeCompile = shader => {
+    material.current.onBeforeCompile = (shader) => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
         { time: { type: 'f', value: 0 } },
@@ -119,7 +152,6 @@ export const DisplacementSphere = props => {
     camera.current.aspect = width / adjustedHeight;
     camera.current.updateProjectionMatrix();
 
-    // Render a single frame on resize when not animating
     if (reduceMotion) {
       renderer.current.render(scene.current, camera.current);
     }
@@ -137,7 +169,7 @@ export const DisplacementSphere = props => {
   }, [reduceMotion, windowSize]);
 
   useEffect(() => {
-    const onMouseMove = event => {
+    const onMouseMove = (event) => {
       const position = {
         x: event.clientX / window.innerWidth,
         y: event.clientY / window.innerHeight,
@@ -187,13 +219,50 @@ export const DisplacementSphere = props => {
   return (
     <Transition in timeout={3000}>
       {visible => (
-        <canvas
-          aria-hidden
-          className={styles.canvas}
-          data-visible={visible}
-          ref={canvasRef}
-          {...props}
-        />
+        <>
+          <canvas
+            aria-hidden
+            className={styles.canvas}
+            data-visible={visible}
+            ref={canvasRef}
+            {...props}
+          />
+          <div
+            onClick={toggleAudioPlayback} // Make the entire bar clickable
+            style={{
+              position: 'fixed', // Use fixed positioning
+              top: '10px', // Distance from the top
+              left: '50%', // Center the bar horizontally
+              transform: 'translateX(-50%)', // Adjust the position to the left by half its width
+              width: '50%', // Only show the middle half
+              height: '60px',
+              background: 'linear-gradient(90deg, red, white, black)', // Gradient background
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center', // Center items
+              padding: '0 20px',
+              color: 'black', // Black text color
+              zIndex: 10,
+              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.5)', // Shadow for depth
+              opacity: barOpacity, // Use state for opacity
+              cursor: 'pointer', // Pointer cursor
+              borderRadius: '30px', // Rounded corners
+            }}>
+            <span style={{
+              marginRight: '20px', // Space between text and button
+              fontSize: '18px', 
+              fontWeight: 'bold',
+            }}>Music Control</span>
+            <span style={{
+              background: 'rgba(255, 255, 255, 0.2)', // Slightly transparent background
+              padding: '10px 20px',
+              borderRadius: '5px', // Rounded corners
+              transition: 'background 0.3s ease', // Smooth transition
+            }}>
+              {isPlaying ? 'Pause' : 'Play'}
+            </span>
+          </div>
+        </>
       )}
     </Transition>
   );
