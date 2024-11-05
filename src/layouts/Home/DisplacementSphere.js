@@ -52,15 +52,31 @@ export const DisplacementSphere = (props) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [barOpacity, setBarOpacity] = useState(1);
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       audioRef.current = new Audio(song);
+      const storedCurrentTime = localStorage.getItem('audioCurrentTime');
+      const storedIsPlaying = localStorage.getItem('audioIsPlaying');
+
+      if (storedCurrentTime) {
+        audioRef.current.currentTime = parseFloat(storedCurrentTime);
+        setCurrentTime(parseFloat(storedCurrentTime));
+      }
+      if (storedIsPlaying === 'true') {
+        audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
+        setIsPlaying(true);
+        setBarOpacity(0.7);
+      }
     }
 
     return () => {
       if (audioRef.current) {
+        setCurrentTime(audioRef.current.currentTime);
         audioRef.current.pause();
+        localStorage.setItem('audioCurrentTime', audioRef.current.currentTime);
+        localStorage.setItem('audioIsPlaying', isPlaying);
       }
     };
   }, []);
@@ -71,6 +87,7 @@ export const DisplacementSphere = (props) => {
         audioRef.current.pause();
         setBarOpacity(1);
       } else {
+        audioRef.current.currentTime = currentTime;
         audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
         setBarOpacity(0.7);
       }
@@ -78,6 +95,7 @@ export const DisplacementSphere = (props) => {
     }
   };
 
+  // Three.js Initialization
   useEffect(() => {
     const { innerWidth, innerHeight } = window;
     mouse.current = new Vector2(0.8, 0.5);
@@ -89,7 +107,7 @@ export const DisplacementSphere = (props) => {
       failIfMajorPerformanceCaveat: true,
     });
     renderer.current.setSize(innerWidth, innerHeight);
-    renderer.current.setPixelRatio(1);
+    renderer.current.setPixelRatio(window.devicePixelRatio);
     renderer.current.outputEncoding = sRGBEncoding;
 
     camera.current = new PerspectiveCamera(54, innerWidth / innerHeight, 0.1, 100);
@@ -127,10 +145,7 @@ export const DisplacementSphere = (props) => {
     const dirLight = new DirectionalLight(colorWhite, 0.6);
     const ambientLight = new AmbientLight(colorWhite, themeId === 'light' ? 0.8 : 0.1);
 
-    dirLight.position.z = 200;
-    dirLight.position.x = 100;
-    dirLight.position.y = 100;
-
+    dirLight.position.set(100, 100, 200);
     lights.current = [dirLight, ambientLight];
     scene.current.background = new Color(...rgbToThreeColor(rgbBackground));
     lights.current.forEach(light => scene.current.add(light));
@@ -142,27 +157,20 @@ export const DisplacementSphere = (props) => {
 
   useEffect(() => {
     const { width, height } = windowSize;
-
     const adjustedHeight = height + height * 0.3;
+
     renderer.current.setSize(width, adjustedHeight);
     camera.current.aspect = width / adjustedHeight;
     camera.current.updateProjectionMatrix();
 
-    if (reduceMotion) {
-      renderer.current.render(scene.current, camera.current);
-    }
-
     if (width <= media.mobile) {
-      sphere.current.position.x = 14;
-      sphere.current.position.y = 10;
+      sphere.current.position.set(14, 10, 0);
     } else if (width <= media.tablet) {
-      sphere.current.position.x = 18;
-      sphere.current.position.y = 14;
+      sphere.current.position.set(18, 14, 0);
     } else {
-      sphere.current.position.x = 22;
-      sphere.current.position.y = 16;
+      sphere.current.position.set(22, 16, 0);
     }
-  }, [reduceMotion, windowSize]);
+  }, [windowSize]);
 
   useEffect(() => {
     const onMouseMove = (event) => {
@@ -194,9 +202,11 @@ export const DisplacementSphere = (props) => {
         uniforms.current.time.value = 0.00005 * (Date.now() - start.current);
       }
 
-      sphere.current.rotation.z += 0.001;
-      sphere.current.rotation.x = rotationX.get();
-      sphere.current.rotation.y = rotationY.get();
+      if (sphere.current) {
+        sphere.current.rotation.z += 0.001;
+        sphere.current.rotation.x = rotationX.get();
+        sphere.current.rotation.y = rotationY.get();
+      }
 
       renderer.current.render(scene.current, camera.current);
     };
@@ -255,7 +265,7 @@ export const DisplacementSphere = (props) => {
               color: 'black', // Black text color for visibility
               cursor: 'pointer', // Pointer cursor for better UX
               transition: 'background 0.3s ease',
-            }}>n
+            }}>
               {isPlaying ? 'Pause' : 'Play'}
             </span>
           </div>
