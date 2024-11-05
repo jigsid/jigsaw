@@ -51,9 +51,8 @@ export const DisplacementSphere = (props) => {
   const rotationY = useSpring(0, springConfig);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [barOpacity, setBarOpacity] = useState(1); // State for bar opacity
+  const [barOpacity, setBarOpacity] = useState(1);
 
-  // Load the audio on component mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       audioRef.current = new Audio(song);
@@ -70,17 +69,14 @@ export const DisplacementSphere = (props) => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
-        setBarOpacity(1); // Reset opacity when paused
+        setBarOpacity(1);
       } else {
         audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
-        setBarOpacity(0.7); // Make bar more transparent when playing
+        setBarOpacity(0.7);
       }
       setIsPlaying(!isPlaying);
     }
   };
-
-  // Automatically pause audio when sphere goes out of viewport
- 
 
   useEffect(() => {
     const { innerWidth, innerHeight } = window;
@@ -228,36 +224,37 @@ export const DisplacementSphere = (props) => {
             {...props}
           />
           <div
-            onClick={toggleAudioPlayback} // Make the entire bar clickable
+            onClick={toggleAudioPlayback}
             style={{
-              position: 'fixed', // Use fixed positioning
-              top: '10px', // Distance from the top
-              left: '50%', // Center the bar horizontally
-              transform: 'translateX(-50%)', // Adjust the position to the left by half its width
-              width: '50%', // Only show the middle half
+              position: 'fixed',
+              top: '10px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '50%',
               height: '60px',
-              background: 'linear-gradient(90deg, red, white, black)', // Gradient background
+              background: 'linear-gradient(90deg, black, lightblue, white)', // Updated gradient
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center', // Center items
+              justifyContent: 'center',
               padding: '0 20px',
-              color: 'black', // Black text color
+              color: 'black',
               zIndex: 10,
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.5)', // Shadow for depth
-              opacity: barOpacity, // Use state for opacity
-              cursor: 'pointer', // Pointer cursor
-              borderRadius: '30px', // Rounded corners
+              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+              opacity: barOpacity,
+              cursor: 'pointer',
+              borderRadius: '30px',
             }}>
             <span style={{
-              marginRight: '20px', // Space between text and button
-              fontSize: '18px', 
+              marginRight: '20px',
+              fontSize: '18px',
               fontWeight: 'bold',
             }}>Music Control</span>
             <span style={{
-              background: 'rgba(255, 255, 255, 0.2)', // Slightly transparent background
-              padding: '10px 20px',
-              borderRadius: '5px', // Rounded corners
-              transition: 'background 0.3s ease', // Smooth transition
+              padding: '10px 20px', // Added padding for visual consistency
+              borderRadius: '5px',
+              color: 'black', // Black text color for visibility
+              cursor: 'pointer', // Pointer cursor for better UX
+              transition: 'background 0.3s ease',
             }}>
               {isPlaying ? 'Pause' : 'Play'}
             </span>
