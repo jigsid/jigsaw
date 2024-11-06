@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from 'react';
 import pic3 from '../../assets/pic3.png';
 import styles from './Home.module.css';
 
+
 const disciplines = ['Backend', 'DevOps', 'Frontend'];
 
 export const Home = () => {
@@ -90,7 +91,7 @@ export const Home = () => {
           textures: [
             {
               srcSet: [pic3, pic3],
-              placeholder: pic3,
+              placeholder: sprTexturePlaceholder,
             },
           ],
         }}
