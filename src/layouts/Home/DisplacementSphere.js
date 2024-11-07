@@ -184,7 +184,7 @@ export const DisplacementSphere = (props) => {
       }
 
       if (sphere.current) {
-        sphere.current.rotation.z += isPlaying ? 0.005 : 0.001;
+        sphere.current.rotation.z += isPlaying ? 0.04 : 0.001;
         sphere.current.rotation.x = rotationX.get();
         sphere.current.rotation.y = rotationY.get();
       }
@@ -260,7 +260,7 @@ export const DisplacementSphere = (props) => {
             }}
           >
             <span style={{ color: 'black', fontSize: '18px', fontWeight: 'bold' }}>
-              {isPlaying ? 'Pause' : 'Play'}
+              {isPlaying ? 'Pause' : 'Play Music?'}
             </span>
           </div>
         </>
