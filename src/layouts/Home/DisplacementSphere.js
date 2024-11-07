@@ -245,7 +245,7 @@ export const DisplacementSphere = (props) => {
               transform: 'translateX(-50%)',
               width: '50%',
               height: '60px',
-              background: 'linear-gradient(90deg, black, #87CEFA, white)', // Light blue gradient
+              background: 'linear-gradient(90deg, black, #ADD8E6, white)', // Light blue gradient
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
