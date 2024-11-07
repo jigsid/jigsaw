@@ -212,8 +212,8 @@ export const DisplacementSphere = (props) => {
       };
 
       // Update the sphere's rotation based on mouse position
-      rotationX.set(position.y * 1 - 1);  // Adjusted for better control
-      rotationY.set(position.x * 1 - 1);  // Adjusted for better control
+      rotationX.set(position.y * 0.7 - 1);  // Adjusted for better control
+      rotationY.set(position.x * 0.7 - 1);  // Adjusted for better control
     };
 
     if (!reduceMotion && isInViewport) {
