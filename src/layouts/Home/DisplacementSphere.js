@@ -51,7 +51,7 @@ export const DisplacementSphere = (props) => {
   const rotationY = useSpring(0, springConfig);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [barOpacity, setBarOpacity] = useState(1);
+  const [barOpacity, setBarOpacity] = useState(6);
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const DisplacementSphere = (props) => {
       if (storedIsPlaying === 'true') {
         audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
         setIsPlaying(true);
-        setBarOpacity(0.7);
+        setBarOpacity(0.1);
       }
     }
 
@@ -85,7 +85,7 @@ export const DisplacementSphere = (props) => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
-        setBarOpacity(1);
+        setBarOpacity(0.85);
       } else {
         audioRef.current.currentTime = currentTime;
         audioRef.current.play().catch((error) => console.error("Audio playback failed:", error));
@@ -119,7 +119,7 @@ export const DisplacementSphere = (props) => {
     material.current.onBeforeCompile = (shader) => {
       uniforms.current = UniformsUtils.merge([
         shader.uniforms,
-        { time: { type: 'f', value: 0 } },
+        { time: { type: 'f', value: 0 }, isPlaying: { value: isPlaying } },
       ]);
 
       shader.uniforms = uniforms.current;
@@ -173,37 +173,18 @@ export const DisplacementSphere = (props) => {
   }, [windowSize]);
 
   useEffect(() => {
-    const onMouseMove = (event) => {
-      const position = {
-        x: event.clientX / window.innerWidth,
-        y: event.clientY / window.innerHeight,
-      };
-
-      rotationX.set(position.y / 2);
-      rotationY.set(position.x / 2);
-    };
-
-    if (!reduceMotion && isInViewport) {
-      window.addEventListener('mousemove', onMouseMove);
-    }
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-    };
-  }, [isInViewport, reduceMotion, rotationX, rotationY]);
-
-  useEffect(() => {
     let animation;
 
     const animate = () => {
       animation = requestAnimationFrame(animate);
 
-      if (uniforms.current !== undefined) {
+      if (uniforms.current) {
         uniforms.current.time.value = 0.00005 * (Date.now() - start.current);
+        uniforms.current.isPlaying.value = isPlaying;
       }
 
       if (sphere.current) {
-        sphere.current.rotation.z += 0.001;
+        sphere.current.rotation.z += isPlaying ? 0.005 : 0.001;
         sphere.current.rotation.x = rotationX.get();
         sphere.current.rotation.y = rotationY.get();
       }
@@ -219,6 +200,28 @@ export const DisplacementSphere = (props) => {
 
     return () => {
       cancelAnimationFrame(animation);
+    };
+  }, [isInViewport, reduceMotion, rotationX, rotationY, isPlaying]);
+
+  // Fix for mouse movement
+  useEffect(() => {
+    const onMouseMove = (event) => {
+      const position = {
+        x: event.clientX / window.innerWidth,
+        y: event.clientY / window.innerHeight,
+      };
+
+      // Update the sphere's rotation based on mouse position
+      rotationX.set(position.y * 1 - 1);  // Adjusted for better control
+      rotationY.set(position.x * 1 - 1);  // Adjusted for better control
+    };
+
+    if (!reduceMotion && isInViewport) {
+      window.addEventListener('mousemove', onMouseMove);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
     };
   }, [isInViewport, reduceMotion, rotationX, rotationY]);
 
@@ -242,30 +245,21 @@ export const DisplacementSphere = (props) => {
               transform: 'translateX(-50%)',
               width: '50%',
               height: '60px',
-              background: 'linear-gradient(90deg, black, lightblue, white)', // Updated gradient
+              background: 'linear-gradient(90deg, black, #87CEFA, white)', // Light blue gradient
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               padding: '0 20px',
               color: 'black',
               zIndex: 10,
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.5)',
+              border: isPlaying ? '2px solid #333' : 'none', // Darker border when playing
               opacity: barOpacity,
               cursor: 'pointer',
               borderRadius: '30px',
-            }}>
-            <span style={{
-              marginRight: '20px',
-              fontSize: '18px',
-              fontWeight: 'bold',
-            }}>Music Control</span>
-            <span style={{
-              padding: '10px 20px', // Added padding for visual consistency
-              borderRadius: '5px',
-              color: 'black', // Black text color for visibility
-              cursor: 'pointer', // Pointer cursor for better UX
-              transition: 'background 0.3s ease',
-            }}>
+              transition: 'border 0.3s ease, opacity 0.3s ease',
+            }}
+          >
+            <span style={{ color: 'black', fontSize: '18px', fontWeight: 'bold' }}>
               {isPlaying ? 'Pause' : 'Play'}
             </span>
           </div>
